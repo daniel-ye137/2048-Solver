@@ -833,6 +833,7 @@ hr {
   float: right;
 }
 
+/* dzy3: formatting for solver options */
 .solver-block {
   padding-top: 10px;
   padding-bottom: 60px;
