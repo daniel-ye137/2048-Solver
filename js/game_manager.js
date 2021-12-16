@@ -10,7 +10,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
-
+ //dzy3: control logic for when a player chooses to have the AI play
   this.inputManager.on("solverPlay", function() {
     var solverPlay = document.querySelector(".solver-play-button");
     if (this.running) {
@@ -31,7 +31,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 
   this.setup();
 }
-
+ //dzy3: control logic for when a player chooses to have the AI play
 GameManager.prototype.solverPlay = function () {
   var currentMove = this.solver.solverMove();
   this.move(currentMove);

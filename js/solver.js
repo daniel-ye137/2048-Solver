@@ -1,3 +1,4 @@
+//author: dzy3
 function Solver(grid) {
   this.grid = grid;
   this.type = "minimax";

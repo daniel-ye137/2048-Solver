@@ -34,6 +34,7 @@ Grid.prototype.fromState = function (state) {
   return cells;
 };
 
+// dzy3: Moves the tiles based on a given direction and calculates the score increase of that move.
 Grid.prototype.move = function (direction) {
   var self = this;
 
@@ -145,6 +146,7 @@ Grid.prototype.positionsEqual = function (first, second) {
   return first.x === second.x && first.y === second.y;
 };
 
+// dzy3: Returns a new grid with the same state as this
 Grid.prototype.copy = function() {
   var gridCopy = new Grid(4);
   for (var x = 0; x < this.size; x++) {
@@ -240,6 +242,7 @@ Grid.prototype.serialize = function () {
   };
 };
 
+// dzy3: Returns the kth largest tile on the board.
 Grid.prototype.kthLargestTile = function(k) {
   var cellList = [];
   this.eachCell(function(x, y, cell) {
