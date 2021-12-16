@@ -1,22 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>2048</title>
 
+  <script>
+    if (typeof window !== undefined && typeof window.location !== undefined && window.location.hostname === "gabrielecirulli.github.io") {
+      if (typeof window.location.replace === "function") {
+        window.location.replace("https://play2048.co/");
+      } else {
+        window.location = "https://play2048.co/"
+      }
+    }
+  </script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+
+    gtag("config", "UA-42620757-2");
+  </script>
+
   <link href="style/main.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
-  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
-  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"  media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone, retina -->
+  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
+  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)">
+  <!-- iPhone, retina -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="viewport"
+    content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="format-detection" content="telephone=no" />
+
+  <meta name="apple-itunes-app" content="app-id=868076805">
+
+  <meta property="og:title" content="2048" />
+  <meta property="og:site_name" content="2048" />
+  <meta property="og:description"
+    content="Join the numbers and get to the 2048 tile! Careful: this game is extremely addictive!" />
+  <meta property="og:image" content="http://gabrielecirulli.github.io/2048/meta/og_image.png" />
+
+  <meta name="twitter:card" content="app" />
+  <meta name="twitter:site" content="@gabrielecirulli" />
+  <meta name="twitter:title" content="2048" />
+  <meta name="twitter:description"
+    content="Join the numbers and get to the 2048 tile! Careful: this game is extremely addictive!" />
+  <meta name="twitter:image" content="http://gabrielecirulli.github.io/2048/meta/og_image.png" />
+  <meta name="twitter:url" content="http://gabrielecirulli.github.io/2048/" />
+  <meta name="twitter:app:country" content="US">
+  <meta name="twitter:app:name:iphone" content="2048">
+  <meta name="twitter:app:id:iphone" content="868076805">
+  <meta name="twitter:app:url:iphone" content="https://itunes.apple.com/us/app/2048-by-gabriele-cirulli/id868076805">
+  <meta name="twitter:app:name:ipad" content="2048">
+  <meta name="twitter:app:id:ipad" content="868076805">
+  <meta name="twitter:app:url:ipad" content="https://itunes.apple.com/us/app/2048-by-gabriele-cirulli/id868076805">
+  <meta name="twitter:app:name:googleplay" content="2048">
+  <meta name="twitter:app:id:googleplay" content="com.gabrielecirulli.app2048">
+  <meta name="twitter:app:url:googleplay"
+    content="https://play.google.com/store/apps/details?id=com.gabrielecirulli.app2048">
 </head>
+
 <body>
+
+
   <div class="container">
     <div class="heading">
       <h1 class="title">2048</h1>
@@ -31,12 +85,64 @@
       <a class="restart-button">New Game</a>
     </div>
 
+    <div class="solver-block">
+      <div style = "float:left">
+        <div >
+          <label>Select Algorithm</label>
+          <select style="float:right;" class="algo">
+            <option value="random">Random</option>
+            <option value="daniel">Daniel's Playstyle</option>
+            <option value="minimax">Minimax</option>
+            <option value="expectimax">Expectimax</option>
+          </select>
+      </div>
+      <div >
+        <label>Select Heuristic</label>
+          <select style="float:right;" class="heur">
+            <option value="score">Score</option>
+            <option value="highest">HighestTile</option>
+            <option value="empty">EmptyTiles</option>
+            <option value="complexV1">ComplexV1</option>
+            <option value="complexV2">ComplexV2</option>
+            <option value="complexV3">ComplexV3</option>
+          </select>
+      </div>
+      <div >
+        <label>Select Depth</label>
+          <select style="float:right;" class="depth">
+            <option value=1>1</option>
+            <option value=2>2 (Max for Expectimax)</option>
+            <option value=3>3 </option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+            <option value=6>6</option>
+            <option value=7>7 (Max for Minimax)</option>
+            <option value=8>8</option>
+        </select>
+      </div>
+      <div >
+        <label>Select Animation Speed</label>
+          <select style="float:right;" class="speed">
+            <option value=1000>Slow</option>
+            <option value=200>Medium</option>
+            <option value=10>Fast</option>
+
+        </select>
+      </div>
+      </div>
+      
+      <div style="float:right; padding-top: 20px ">
+        <a class="solver-play-button">Solver Play</a>
+      </div>
+    </div>
+
     <div class="game-container">
       <div class="game-message">
         <p></p>
         <div class="lower">
-	        <a class="keep-playing-button">Keep going</a>
+          <a class="keep-playing-button">Keep going</a>
           <a class="retry-button">Try again</a>
+          <div class="score-sharing"></div>
         </div>
       </div>
 
@@ -73,18 +179,25 @@
     </div>
 
     <p class="game-explanation">
-      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two
+      tiles with the same number touch, they <strong>merge into one!</strong>
     </p>
+    
     <hr>
     <p>
-    <strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
+      Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a
+        href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and
+      conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
     </p>
-    <hr>
-    <p>
-    Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
-    </p>
+
+    <footer class="links">
+      <a href="./privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+    </footer>
   </div>
 
+
+
+  
   <script src="js/bind_polyfill.js"></script>
   <script src="js/classlist_polyfill.js"></script>
   <script src="js/animframe_polyfill.js"></script>
@@ -95,5 +208,7 @@
   <script src="js/local_storage_manager.js"></script>
   <script src="js/game_manager.js"></script>
   <script src="js/application.js"></script>
+  <script src="js/solver.js"></script>
 </body>
+
 </html>

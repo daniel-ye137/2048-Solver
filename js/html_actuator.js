@@ -3,6 +3,7 @@ function HTMLActuator() {
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
+  this.sharingContainer = document.querySelector(".score-sharing");
 
   this.score = 0;
 }
@@ -37,6 +38,12 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
 
 // Continues the game (both restart and keep playing)
 HTMLActuator.prototype.continueGame = function () {
+  if (typeof gtag !== "undefined") {
+    gtag("event", "restart", {
+      event_category: "game",
+    });
+  }
+
   this.clearMessage();
 };
 
@@ -128,8 +135,19 @@ HTMLActuator.prototype.message = function (won) {
   var type    = won ? "game-won" : "game-over";
   var message = won ? "You win!" : "Game over!";
 
+  if (typeof gtag !== "undefined") {
+    gtag("event", "end", {
+      event_category: "game",
+      event_label: type,
+      value: this.score,
+    });
+  }
+
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
+
+  this.clearContainer(this.sharingContainer);
+  // this.sharingContainer.appendChild(this.scoreTweetButton());
 };
 
 HTMLActuator.prototype.clearMessage = function () {
@@ -137,3 +155,4 @@ HTMLActuator.prototype.clearMessage = function () {
   this.messageContainer.classList.remove("game-won");
   this.messageContainer.classList.remove("game-over");
 };
+
